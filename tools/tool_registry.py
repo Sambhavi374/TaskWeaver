@@ -4,8 +4,11 @@ from langchain.agents import Tool
 from langchain.tools import WikipediaQueryRun
 from langchain.utilities import WikipediaAPIWrapper
 
-# Wikipedia tool
+# tools
 wiki = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper())
+duckduckgo = DuckDuckGoSearchRun()
+weather = WeatherTool()
+task_manager = TaskManagerTool()
 
 # List of available tools
 TOOLS = [
