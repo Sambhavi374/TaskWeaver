@@ -1,6 +1,6 @@
 import streamlit as st
 from graph_builder import build_graph
-from state import AgentState
+from state import empty_state
 
 st.set_page_config(page_title="Agentic Workflow", layout="wide")
 st.title("🧠 LangGraph Agentic Workflow")
@@ -15,13 +15,13 @@ user_input = st.text_area("Enter your query:", placeholder="e.g., Plan a 3-day t
 
 if st.button("Run Workflow"):
     if user_input.strip():
-        state = AgentState(user_input)
         graph = build_graph()
-        final_state = graph.execute(state)
+        state = empty_state(user_input)
+        final_state = graph.invoke(state)
 
         st.success("✅ Task execution completed!")
         st.subheader("Results")
-        for task, result in final_state.results:
+        for task, result in final_state["results"]:
             st.markdown(f"**📝 Task:** {task}")
             st.markdown(f"**📄 Result:** {result}")
             st.markdown("---")
